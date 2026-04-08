@@ -1,148 +1,105 @@
-﻿# Sistema de GestÃ£o de Pedidos - HLP Controle
+﻿# HLP Controle
 
-Sistema web completo para gestÃ£o de pedidos de confecÃ§Ã£o de uniformes e bordados.
+Sistema web em PHP para controle de pedidos, produtos, producao e entrega, com autenticacao de usuarios e suporte a multiempresa.
 
-## Tecnologias Utilizadas
+## Tecnologias
 
-- **PHP** (puro, sem frameworks)
-- **MySQL**
-- **HTML5**, **CSS3**, **JavaScript** (puro)
+- PHP puro
+- MySQL
+- HTML, CSS e JavaScript
 
-## Estrutura do Projeto
+## Principais funcionalidades
 
-```
-/ (raiz)
-â”œâ”€â”€ config/
-â”‚   â””â”€â”€ db.php          # ConexÃ£o com banco de dados
-â”œâ”€â”€ pages/
-â”‚   â”œâ”€â”€ header.php      # CabeÃ§alho e menu
-â”‚   â”œâ”€â”€ footer.php      # RodapÃ©
-â”‚   â”œâ”€â”€ login.php       # PÃ¡gina de login
-â”‚   â”œâ”€â”€ dashboard.php   # Dashboard principal
-â”‚   â”œâ”€â”€ produtos.php    # CRUD de produtos
-â”‚   â”œâ”€â”€ pedidos.php     # Cadastro de pedidos
-â”‚   â”œâ”€â”€ lista_pedidos.php # Listagem com filtros
-â”‚   â”œâ”€â”€ detalhes_pedido.php # Detalhes do pedido
-â”‚   â”œâ”€â”€ producao.php    # Pedidos em produÃ§Ã£o
-â”‚   â””â”€â”€ entregues.php   # Pedidos entregues
-â”œâ”€â”€ actions/
-â”‚   â”œâ”€â”€ login.php       # Processa login
-â”‚   â”œâ”€â”€ logout.php      # Faz logout
-â”‚   â”œâ”€â”€ produto_crud.php # CRUD produtos
-â”‚   â””â”€â”€ pedido_crud.php # CRUD pedidos
-â”œâ”€â”€ assets/
-â”‚   â”œâ”€â”€ css/
-â”‚   â”‚   â””â”€â”€ style.css   # Estilos CSS
-â”‚   â””â”€â”€ js/
-â”‚       â””â”€â”€ scripts.js  # Scripts JavaScript
-â”œâ”€â”€ index.php           # PÃ¡gina inicial
-â””â”€â”€ create_tables.sql   # Script SQL para criar banco
+- Login com controle de sessao
+- Dashboard com visao geral dos pedidos
+- Cadastro e gerenciamento de produtos
+- Cadastro de categorias de produtos
+- Criacao de pedidos com multiplos itens
+- Fluxo de status entre `Producao`, `Pronto` e `Entregue`
+- Listagens e detalhes de pedidos
+- Administracao de usuarios
+- Separacao de dados por empresa
+
+## Estrutura do projeto
+
+```text
+/
+|-- actions/            # Processamento de login, logout, CRUD e acoes auxiliares
+|-- assets/
+|   |-- css/            # Estilos da aplicacao
+|   |-- img/            # Icones e imagens
+|   `-- js/             # Scripts do frontend
+|-- config/             # Banco, autenticacao, multiempresa e helpers
+|-- pages/              # Telas da aplicacao
+|-- create_tables.sql   # Script de criacao do banco
+|-- index.php           # Entrada principal
+`-- install.php         # Instalacao automatica das tabelas
 ```
 
-## InstalaÃ§Ã£o e ConfiguraÃ§Ã£o
+## Requisitos
 
-### 1. PrÃ©-requisitos
-
-- Servidor web (Apache/Nginx)
 - PHP 7.4 ou superior
 - MySQL 5.7 ou superior
-- Recomendado: XAMPP (para desenvolvimento local)
+- Apache, Nginx ou ambiente local como XAMPP
 
-### 2. ConfiguraÃ§Ã£o do Banco de Dados
+## Configuracao
 
-1. Crie um banco de dados MySQL chamado `hlp_controle`
-2. Execute o script `create_tables.sql` no phpMyAdmin ou linha de comando
-3. Verifique as credenciais em `config/db.php` (padrÃ£o: root, sem senha)
+### 1. Banco de dados
 
-### 3. ConfiguraÃ§Ã£o do Servidor
+Edite as credenciais em [config/db.php](/c:/Users/humbe/OneDrive/Documentos/HLP-controle/config/db.php).
 
-1. Coloque os arquivos na pasta `htdocs` (XAMPP) ou equivalente
-2. Acesse via navegador: `http://localhost/HLP-controle/`
+Por padrao:
 
-### 4. Primeiro Acesso
+- Banco: `hlp_controle`
+- Host: `localhost`
+- Usuario: `root`
+- Senha: definida no proprio arquivo
 
-- **Usuário:** admin
-- **Senha:** admin123
+### 2. Instalacao
 
-## Funcionalidades
+Voce pode instalar de duas formas:
 
-### ðŸ” AutenticaÃ§Ã£o
+1. Manualmente, executando o arquivo `create_tables.sql` no MySQL.
+2. Automaticamente, acessando `install.php` no navegador.
 
-- Login seguro com hash de senha
-- SessÃµes PHP
-- Bloqueio de acesso não autorizado
+### 3. Execucao local
 
-### ðŸ“Š Dashboard
+Coloque o projeto no diretorio publico do seu servidor, por exemplo `htdocs`, e acesse:
 
-- Totais de pedidos
-- Faturamento total
-- Pedidos em produÃ§Ã£o/entregues
-- Cards visuais
+```text
+http://localhost/HLP-controle/
+```
 
-### ðŸ‘• Produtos
+## Primeiro acesso
 
-- CRUD completo (Criar, Listar, Editar, Excluir)
-- ValidaÃ§Ã£o de dados
-- Categorias
+- Usuario: `admin`
+- Senha: `admin123`
 
-### ðŸ“¦ Pedidos
+## Modulos disponiveis
 
-- Cadastro completo com mÃºltiplos produtos
-- CÃ¡lculo automÃ¡tico de total
-- SeleÃ§Ã£o dinÃ¢mica de produtos
-- ValidaÃ§Ãµes
+- `Dashboard`: resumo dos pedidos e indicadores principais
+- `Produtos`: cadastro, edicao e exclusao
+- `Categorias`: organizacao dos produtos por categoria
+- `Pedidos`: criacao e acompanhamento dos pedidos
+- `Producao / Prontos / Entregues`: acompanhamento do fluxo de trabalho
+- `Relacao de produtos`: visualizacao consolidada dos itens
+- `Perfil`: atualizacao de dados do usuario
+- `Administracao`: gestao de usuarios e empresa
 
-### ðŸ”„ Controle de Status
+## Seguranca e arquitetura
 
-- Produção â†’ Pronto â†’ Entregue
-- PÃ¡ginas separadas por status
-- Cores visuais
+- Uso de `PDO` com consultas preparadas
+- Senhas armazenadas com hash
+- Controle de sessao no backend
+- Restricao de acesso para areas autenticadas e administrativas
+- Bootstrap de recursos multiempresa em [config/tenant.php](/c:/Users/humbe/OneDrive/Documentos/HLP-controle/config/tenant.php)
 
-### ðŸ“‹ Listagem e Filtros
+## Observacoes
 
-- Busca por nome
-- Filtros por status, categoria, data
-- Ações rÃ¡pidas
+- O projeto possui suporte a multiempresa com empresa padrao criada automaticamente.
+- O arquivo `install.php` ajuda a preparar o banco em ambientes novos.
+- Se houver erro de conexao, revise as credenciais em [config/db.php](/c:/Users/humbe/OneDrive/Documentos/HLP-controle/config/db.php).
 
-### ðŸ§¾ Detalhes do Pedido
+## Licenca
 
-- Lista completa de produtos
-- Totais calculados
-
-## SeguranÃ§a
-
-- Prepared statements para prevenir SQL Injection
-- Senhas hashadas com password_hash()
-- ValidaÃ§Ã£o de entrada
-- SessÃµes seguras
-
-## Interface
-
-- Design moderno e responsivo
-- UX profissional
-- Feedback visual (mensagens)
-- Mobile-friendly
-
-## Desenvolvimento Futuro
-
-O sistema está preparado para:
-
-- MÃºltiplos usuários
-- Controle por empresa
-- ExpansÃ£o para SaaS
-- RelatÃ³rios avanÃ§ados
-- IntegraÃ§Ã£o com APIs
-
-## Suporte
-
-Para dÃºvidas ou problemas, verifique:
-
-1. Logs de erro do PHP
-2. ConexÃ£o com banco de dados
-3. PermissÃµes de arquivos
-4. ConfiguraÃ§Ãµes do servidor web
-
----
-
-**Desenvolvido para gestÃ£o profissional de pedidos de confecÃ§Ã£o.**
-
+Uso interno / privado, salvo definicao diferente pelo responsavel do projeto.
